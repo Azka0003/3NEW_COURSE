@@ -1,0 +1,2 @@
+this creates file and this is the content of file
+This is the newline added to that file

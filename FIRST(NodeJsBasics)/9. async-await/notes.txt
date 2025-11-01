@@ -1,0 +1,85 @@
+Yes ✅ — async functions always return a Promise.
+Even if you return a normal value, JS automatically wraps it in a Promise.
+
+Example:
+async function add() {
+  return 5;
+}
+console.log(add()); // 👉 Promise { 5 }
+
+So:
+🔹 async = function always returns a Promise
+🔹 await = waits for that Promise to resolve
+
+
+
+| Type            | Waits?                    | Who waits?                     | Looks like                 | Use case                     |
+| --------------- | ------------------------- | ------------------------------ | -------------------------- | ---------------------------- |
+| **Callback**    | ❌ No                      | Only the callback runs later   | `fs.readFile('a.txt', cb)` | Simple async tasks           |
+| **Promise**     | ❌ No                      | Only `.then()` part runs later | `promise.then(...)`        | Cleaner async chaining       |
+| **Async/Await** | ✅ Yes (inside async func) | Code **waits** for Promise     | `await somePromise()`      |Most readable async handling|
+
+no no q kra callback or then ke liye wait kr to rhe
+| Type            | JS waits (blocks)?            | What actually happens                                                                      |
+| --------------- | ----------------------------- | ------------------------------------------------------------------------------------------ |
+| **Callback**    | ❌ No                          | JS keeps running other code. When async work finishes, callback is *called later*.         |
+| **Promise**     | ❌ No                          | JS keeps running. When resolved, `.then()` runs later.                                     |
+| **Async/Await** | ✅ *Yes, inside that function* | It **pauses that async function** until Promise resolves — but rest of program still runs. |
+
+
+✅ In short:
+Callback & .then() don’t make JS wait — they just react later.
+await really pauses the async function (but not the whole program).
+You said:
+accha vo single line hain yh async await mein func h
+
+
+
+again
+👇
+🧠 Think of it like this:
+When you create a Promise, the code outside of .then() doesn’t wait.
+But the .then() part waits until the Promise is resolved
+
+
+
+
+
+🔹 Why async before division function?
+Because you are using await inside it 👇
+await division(10, 2)
+and await can only be used inside an async function — nowhere else.
+
+🔹 What does async do?
+When you put async before a function:
+That function automatically returns a Promise, even if you use return num1/num2;
+You can use await inside it to pause until another Promise finishes.
+
+🧠 Example:
+async function test() {
+  return 5;
+}
+console.log(test()); // 👉 prints Promise { 5 }
+
+
+Even though you didn’t write a Promise, async made it one for you.
+🔹 In your code:
+async function division(num1,num2){ ... }
+
+means this division() function returns a Promise,
+so that mainFn() can safely do:
+await division(10,2)
+
+✅ In short:
+async makes a function return a Promise
+and lets you use await inside it.
+
+
+🔹 Why mainFn is also async?
+Because inside mainFn, you’re using await here:
+console.log(await division(10,2))
+👉 and await can only be used inside an async function — not in normal ones.
+
+💬 In short:
+async lagana zaroori hai jab bhi tum function ke andar await use karti ho.
+So both division() and mainFn() are async because both use await.
