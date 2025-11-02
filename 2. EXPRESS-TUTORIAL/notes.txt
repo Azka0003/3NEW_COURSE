@@ -1,0 +1,116 @@
+| Method     | Purpose                                       | Typical Data Flow                               | Example                                           |
+| ---------- | --------------------------------------------- | ----------------------------------------------- | ------------------------------------------------- |
+| GET    | To fetch data from server                         | Usually no body, parameters sent in URL         | `GET /users?age=20`                               |
+| POST   | To send data to server (as data is crucial)       | Data sent in body (often JSON)                  | `POST /users` with `{ "name": "Azka" }`           |
+| PUT    | To update data                                    | JSON body                                       | `PUT /users/1` with `{ "name": "Azka Abdullah" }` |
+| DELETE | To delete data                                    | Sometimes body or just URL                      | `DELETE /users/1`                                 |
+
+
+✅ Summary:
+res.send() works with POST, GET, PUT, DELETE — all.
+res.json() is just a specialized version of send() for sending JSON data.
+
+
+When I say “JSON data”, I mean data written in JSON format —
+that’s just a way to represent structured information.
+
+🧩 JSON means “JavaScript Object Notation”
+It looks like JavaScript objects, but it’s really plain text.
+Example of JSON data 👇
+{
+  "name": "Azka",
+  "age": 20,
+  "city": "Lucknow"
+}
+It’s just text — but it has key–value pairs (like a dictionary or object).
+
+💡 Why it’s called “JSON data”
+Because when we send or receive information between:
+frontend ↔ backend
+browser ↔ server
+we often send it in JSON format (as text).
+That’s why we say things like:
+“The server received JSON data”
+or
+“The API returns JSON data”
+So, when I say JSON data, I just mean:
+“The structured text (key-value pairs) sent or received between client and server.”
+
+🧩 JSON is not a JavaScript object.
+It just looks like one — but technically, JSON is text (a string).
+🧠 Think of it like this:
+| Concept               | Type                  | Example                         | Notes                         |
+| --------------------- | --------------------- | ------------------------------- | ----------------------------- |
+| **JavaScript Object** | actual in-memory data | `{ name: "Azka", age: 20 }`     | used inside your JS code      |
+| **JSON**              | text (string)         | `'{"name": "Azka", "age": 20}'` | used for sending/storing data |
+
+
+// ✅ JavaScript Object
+const user = {
+  name: "Azka",
+  age: 20,
+  city: "Lucknow"
+};
+✅ You can access its values directly:
+
+console.log(user.name); // Azka
+console.log(user.age);  // 20
+
+
+🧩 2. JSON (JavaScript Object Notation)
+It looks similar, but it’s just text (a string) — not a real object.
+// ✅ JSON
+const jsonData = '{"name":"Azka","age":20,"city":"Lucknow"}';
+❌ You can’t access its values directly:
+console.log(jsonData.name); // undefined ❌
+
+
+
+
+🧩 1. res.send()
+Use res.send() when you want to send any kind of response —
+text, HTML, or even objects.
+Example:
+app.get('/', (req, res) => {
+  res.send('Welcome to our home page'); // sending text
+});
+It can also send an object, but Express will automatically convert it to JSON:
+app.get('/user', (req, res) => {
+  res.send({ name: 'Azka', age: 20 }); // sends JSON automatically
+});
+So res.send() is flexible — it sends whatever you give it.
+
+🧩 2. res.json()
+Use res.json() when you specifically want to send JSON data
+(i.e., a structured object or array).
+Example:
+app.get('/products', (req, res) => {
+  const products = [
+    { id: 1, name: 'Pen' },
+    { id: 2, name: 'Notebook' }
+  ];
+  res.json(products); // sends JSON response
+});
+It automatically:
+Converts your JS object → JSON text (JSON.stringify())
+Sets the header Content-Type: application/json
+So it’s more explicit and cleaner when you’re building APIs.
+
+
+Middleware functions are functions that have access to the request object (req), the response object (res), and the next function in the application’s request-response cycle. The next function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.
+Middleware functions can perform the following tasks:
+
+Execute any code.
+Make changes to the request and the response objects.
+End the request-response cycle.
+Call the next middleware in the stack.
+If the current middleware function does not end the request-response cycle, it must call next() to pass control to the next middleware function. Otherwise, the request will be left hanging.
+
+Types:
+Application level
+Router level
+Error Handling
+
+custom
+built-in
+Third-Party
