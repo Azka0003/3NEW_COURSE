@@ -31,6 +31,16 @@ Example:
 path.join("/user/", "/node", "file.txt");
 // → "\user\node\file.txt"
 
+path.join() ONLY joins the path segments you give it.
+It does NOT automatically add:
+current working directory (CWD)
+current file’s directory (__dirname)
+absolute path resolution
+unless you put those yourself.
+
+
+
+
 🔹 path.resolve(...)
 Gives the absolute path (from your current working directory).
 const resolvePath = path.resolve("user", "documents", "node", "projects");
