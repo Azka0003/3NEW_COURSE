@@ -1,0 +1,6 @@
+node_modules/
+notes.md
+.env
+aggregation-vs-find.pdf
+mongoose-populate-concise.pdf
+objectid-references-explained.pdf

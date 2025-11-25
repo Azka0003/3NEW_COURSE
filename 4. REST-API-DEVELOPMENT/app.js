@@ -62,6 +62,7 @@ app.post('/add',(req,res)=>{
 //update a book
 app.put('/update/:id',(req,res)=>{
     const findCurrentBook=books.find(bookItem => bookItem.id === parseInt(req.params.id))
+    console.log(findCurrentBook)
     if(findCurrentBook)
     {
         findCurrentBook.title=req.body.title || findCurrentBook.title

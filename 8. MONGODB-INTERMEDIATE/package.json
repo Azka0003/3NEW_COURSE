@@ -1,5 +1,5 @@
 {
-  "name": "7.-nodejs-auth",
+  "name": "8.-mongodb-intermediate",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -12,13 +12,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcryptjs": "^3.0.3",
-    "cloudinary": "^2.8.0",
     "dotenv": "^17.2.3",
-    "express": "^5.1.0",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^9.0.0",
-    "multer": "^2.0.2"
+    "express": "^5.2.1",
+    "mongoose": "^9.1.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.11"

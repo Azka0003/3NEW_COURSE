@@ -60,6 +60,32 @@ console.log(normalizePath);
 Output:
 \user\node\projects
 
+**Rules for . and .. in Node.js path.normalize()**
+. (current directory)
+Always removed.
+Example: /user/./docs → /user/docs
+
+.. (parent directory)
+Removes the directory immediately before it.
+Example: /user/docs/../node → /user/node
+If .. is at the start of the path, it stays:
+../user/docs → ../user/docs
+
+Folders starting with . (like .config)
+They are real folder names, not special.
+Only a .. after them can remove them.
+Example: /user/.config/../data → /user/data
+.config is kept until .. removes it
+
+Multiple ..
+Each .. removes the folder immediately before it:
+/a/b/c/../../d → /a/d
+first .. removes c → /a/b
+second .. removes b → /a
+then d added → /a/d
+
+
+
 🧠 It makes sure your path is valid and consistent.
 
 🧾 Summary Table

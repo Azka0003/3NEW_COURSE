@@ -10,4 +10,4 @@ setTimeout(()=>{
 console.log('this is the last line of the sync code')
 
 //long code messy so (node js has module system) module
-//node js module syatem allow u to organize ur code to multiple reusable pieces of modules right so ull be creating multiple
+//node js module system allow u to organize ur code to multiple reusable pieces of modules right so ull be creating multiple

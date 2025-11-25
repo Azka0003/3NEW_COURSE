@@ -1,3 +1,4 @@
+//how to connect mongoose create schema and 
 const mongoose = require('mongoose')
 mongoose.connect('mongodb+srv://Azka003:azka1234@cluster0.cgmuuk9.mongodb.net/')
     .then(() => console.log('database connected successfully'))
@@ -14,7 +15,15 @@ const userSchema = new mongoose.Schema({
 });
 
 
-//create user model or collection in thi User model all users will stored of this type schema,'User' this is u paseed name of model can be anything but should be meaningful
+// We are creating a User model (collection) in mongodbatlas.
+// This model defines how user data will be stored in the database.
+// All users will be saved following schema structure u defined.
+
+// 'User'
+// This is the name of the model.
+// You can give it any name,
+// but it should be meaningful (for example: User, Product, Order).
+
 const User = mongoose.model('User', userSchema)
 
 async function runQueryExamples() {
@@ -54,7 +63,7 @@ async function runQueryExamples() {
         //     name: 'Johndoe'
         // })
         // console.log(getUseJohnDoe)
-        //we will get only one in output but that one that will meet requiremnts firstly
+        //we will get only one in output but that one who will meet requiremnts firstly
 
         // getting data from their id of new user created corresponding
         // const getLastCreatedUserByUserId = await User.findById(newUser._id)
@@ -84,6 +93,8 @@ async function runQueryExamples() {
 
 
         //now wants to update user id pass kro then what u want to upadate and then return object 
+        //$push is used to add values to an array without overwriting existing data, 
+        //whereas $set replaces the field value. With { new: true }, findOneAndUpdate returns the updated document.
         // const updateduser = await User.findByIdAndUpdate(newUser._id, {
         //     $set: { age: 100 }, $push: { tags: 'updated' }
         // }, { new: true })
@@ -103,7 +114,7 @@ async function runQueryExamples() {
 
 runQueryExamples();
 
-
+//connection->schema->model->create document->perform operations on document like find update select limit etc
 
 // 🔍 Why User becomes users in MongoDB?
 // When you write:
