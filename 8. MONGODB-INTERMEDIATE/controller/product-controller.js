@@ -169,6 +169,7 @@ const insertSampleProducts = async (req, res) => {
 }
 
 module.exports = { insertSampleProducts, getProductStats, getProductAnalysis };
-// module.exports = insertSampleProducts ; Passing without {} works only when we export the function itself, not an object.mean not in {}
+// module.exports = insertSampleProducts ; Passing without {} works only when we export the function itself,
+//  not an object(mean not in {})
 
 
