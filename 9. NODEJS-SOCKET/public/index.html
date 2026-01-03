@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+</head>
+
+<body>
+
+    <div id="user-list">
+        <h3>Online Users</h3>
+        <ul id="users"></ul>
+    </div>
+
+    <div id="chat">
+
+    </div>
+    <form action="" id="message-form">
+        <input type="text" name="" id="message-input" placeholder="Enter your message" required />
+
+        <button type="submit">Send</button>
+    </form>
+
+    
+
+    <script src="socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        //we need four things chat place, list of users,message, message input
+        const chat = document.getElementById('chat');
+        const usersList = document.getElementById('users');
+        const messageForm = document.getElementById('message-form');
+        const messageInput = document.getElementById('message-input');
+
+        //whenever user enter ask name
+        const userName = prompt('Enter your username');
+        //1st
+        socket.emit('join', userName);  //user joined
+
+        //2nd
+        socket.on("userJoined", (user) => {
+            addMessage(`${user} has joined the chat`)
+        });
+
+        //3rd
+        socket.on("userList", (users) => {
+            usersList.innerHTML = users.map(user =>
+                `<li>${user}</li>`
+            ).join("");
+        });
+
+
+        function addMessage(input) {
+            const messageElement = document.createElement('div');
+            messageElement.textContent = input
+
+            chat.appendChild(messageElement);
+
+            //scroll to the bottom of the chat container
+            chat.scrollTop = chat.scrollHeight;
+        }
+        //till now u have maintained a user entered the chat  display a mesaage of that user joined with the list of the users 
+        //so for this ofc we write on client side mean client will emit and server will listen
+        //mean when user type something in form u need to handle that
+        //handle form submission
+
+        messageForm.addEventListener('submit', (event) => {
+            event.preventDefault(); //prevent refresh 
+
+            const extractMessageText = messageInput.value.trim();
+
+            if (extractMessageText) {
+                socket.emit("chatMessage", {
+                    userName, text: extractMessageText
+                });
+
+                messageInput.value = "";
+            }
+        })
+        //so here we emit the event that message sent from client now need to listen on server side 
+        // --------------------------------------------------------server side
+        //here we listening what server emit
+
+        //listen for chatmessages events from the server
+        socket.on('chatMessage', (message) => {
+            addMessage(`${message.userName}: ${message.text}`)
+        })
+
+
+         socket.on('userLeft',(user)=>{
+            addMessage(`${user} has left the chat`);
+         })
+    </script>
+
+</body>
+
+</html>
+
+<!-- client side -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat aaplication</title>
+</head>
+
+<body>
+    <div id="user-list">
+        <h3>online users</h3>
+        <ul id="users"></ul>
+    </div>
+
+    <div id="chat"></div>
+
+    <div>
+        <form action="" id="message-form">
+            <input type="text" name="" id="message-input">
+        </form>
+    </div>
+
+    <script src="socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        const chat = document.getElementById('chat');
+        const usersList = document.getElementById('users');
+        const messageForm = document.getElementById('message-form');
+        const messageInput = document.getElementById('message-input');
+
+        const userName = prompt('Enter user name:');
+
+        socket.emit('join', userName);
+
+        socket.on('userJoined', (user) => {
+            addMessage(`${user} has joined the chat`);
+        })
+
+        socket.on('userList', (users) => {
+            usersList.innerHTML = users.map(user => 
+                `<li>${user}</li>`
+            ).join("");
+        })
+
+
+        function addMessage(input) {
+            const mesaageElement = document.createElement('div');
+            mesaageElement.textContent = input;
+            chat.appendChild(mesaageElement);
+
+
+            chat.scrollTop = chat.scrollHeight;
+        }
+    </script>
+</body>
+
+</html> -->
