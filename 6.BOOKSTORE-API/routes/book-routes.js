@@ -14,8 +14,8 @@ const { getAllBooks,
 
 router.get('/get',getAllBooks);
 router.get('/get/:id',getSingleBookById)
-router.get('/add',addNewBook)
-router.get('/update/:id',updateBook)
-router.get('/delete/:id',deleteBook)
+router.post('/add',addNewBook)
+router.put('/update/:id',updateBook)
+router.delete('/delete/:id',deleteBook)
 
 module.exports=router;

@@ -13,6 +13,22 @@ connectToDB();
 app.use(express.json());
 
 
+
+// ✅ ROOT ROUTE - Add this before other routes
+app.get('/', (req, res) => {
+    res.json({ 
+        message: 'Bookstore API is running!',
+        status: 'OK',
+        endpoints: {
+            getAllBooks: 'GET /api/books',
+            getBookById: 'GET /api/books/:id',
+            addBook: 'POST /api/books',
+            updateBook: 'PUT /api/books/:id',
+            deleteBook: 'DELETE /api/books/:id'
+        }
+    });
+});
+
 //routes here ex /api/books/delete/:2 ,this below one is parent
 app.use("/api/books",bookRoutes);
 
