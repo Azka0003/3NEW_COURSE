@@ -32,8 +32,8 @@ app.get('/', (req, res) => {
 //routes here ex /api/books/delete/:2 ,this below one is parent
 app.use("/api/books",bookRoutes);
 
-// app.listen(PORT,()=>{
-//     console.log(`Server is now running on port ${PORT}`);
-// });
+app.listen(PORT,()=>{
+    console.log(`Server is now running on port ${PORT}`);
+});
 //for vercel as that is serverless
-module.exports = app;
+// module.exports = app;
